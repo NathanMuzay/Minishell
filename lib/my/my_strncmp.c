@@ -4,10 +4,6 @@
 ** File description:
 ** Day 6, task 7
 */
-#include "my.h"
-
-
-
 
 int my_strncmp(char const *s1, char const *s2, int n)
 {

@@ -4,7 +4,6 @@
 ** File description:
 ** day 4, task 3
 */
-#include "my.h"
 
 int my_strlen(char const *str)
 {

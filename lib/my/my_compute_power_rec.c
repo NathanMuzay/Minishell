@@ -4,10 +4,6 @@
 ** File description:
 ** day 5, task 4
 */
-#include "my.h"
-
-
-
 
 int my_compute_power_rec(int nb, int p)
 {

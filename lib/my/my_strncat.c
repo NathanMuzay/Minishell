@@ -4,19 +4,16 @@
 ** File description:
 ** Day 7, task 3
 */
-#include "my.h"
 
-
-char *my_strcat(char *dest, const char *src)
+char *my_strncat(char *dest, char const *src, int nb)
 {
     int i = 0;
     int j = 0;
 
-    if (!dest || !src)
-        return NULL;
-    while (dest[i] != '\0')
+    while (dest[i] != '\0'){
         i++;
-    while (src[j] != '\0') {
+    }
+    while (j < nb){
         dest[i] = src[j];
         i++;
         j++;

@@ -4,10 +4,6 @@
 ** File description:
 ** Day 6, task 2
 */
-#include "my.h"
-
-
-
 
 char *my_strncpy(char *dest, char const *src, int n)
 {

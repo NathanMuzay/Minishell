@@ -4,10 +4,6 @@
 ** File description:
 ** Day 6, task 8
 */
-#include "my.h"
-
-
-
 
 char *my_strupcase(char *str)
 {

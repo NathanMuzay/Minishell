@@ -10,12 +10,15 @@ int my_getnbr(char *const str)
 {
     int res = 0;
     int i = 0;
+    int no = -1;
 
     while (str[i] != '\0') {
         res *= 10;
         res += str[i] - 48;
         i += 1;
+        no = res;
     }
+    res = no;
     return (res);
 }
 

@@ -4,10 +4,8 @@
 ** File description:
 ** day 5, task 1
 */
+
 #include "my.h"
-
-
-
 
 int my_compute_factorial_it(int nb)
 {

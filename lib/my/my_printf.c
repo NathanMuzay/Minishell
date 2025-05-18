@@ -1,109 +1,85 @@
 /*
 ** EPITECH PROJECT, 2024
-** mini_printf
+** my_printf
 ** File description:
-** mini_printf
+** projet printf
 */
 
+#include <stdarg.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include "../../include/my.h"
 
-
-
-#include "my.h"
-
-static int test4(char const *format, int a, va_list ap)
+int calcul_precision(const char *format, int *a, int *attributs)
 {
-    switch (format[a]) {
-        case 'i':
-            return my_putnbr(va_arg(ap, unsigned int));
-        default:
-            write(2, "84", 2);
-            return 84;
-    }
-}
+    int precision = 6;
 
-static int test3(char const *format, int a, int pre, va_list ap)
-{
-    switch (format[a]) {
-        case 'f':
-            return my_put_float_f(va_arg(ap, double), pre);
-        case 'F':
-            return my_put_float_f(va_arg(ap, double), pre);
-        case 'd':
-            return my_putnbr(va_arg(ap, long int));
-        default:
-            return test4(format, a, ap);
-    }
-}
-
-static long unsigned int test2(char const *format, int a, int pre, va_list ap)
-{
-    switch (format[a]) {
-        case 'o':
-            return my_putnbr_octal(va_arg(ap, unsigned int));
-        case 'u':
-            return my_put_unsigned(va_arg(ap, unsigned long int));
-        default:
-            return test3(format, a, pre, ap);
-    }
-}
-
-static int test1(char const *format, int a, int pre, va_list ap)
-{
-    switch (format[a]) {
-        case 'c':
-            return my_putchar(va_arg(ap, int));
-        case 's':
-            return my_putstr(va_arg(ap, char *));
-        case 'x':
-            return my_putnbr_hexamin(va_arg(ap, unsigned int));
-        case 'X':
-            return my_putnbr_hexamaj(va_arg(ap, unsigned int));
-        case 'p':
-            my_putstr("0x");
-            return my_putnbr_hexamin(va_arg(ap, unsigned long int));
-        case '%':
-            return my_putchar('%');
-        default:
-            return test2(format, a, pre, ap);
-    }
-}
-
-int get_precision(const char *str, int *index)
-{
-    int precision = 0;
-    int i = *index;
-
-    if (str[i] == '.') {
+    if (format[*a] == '.') {
+        attributs[0] = 1;
+        (*a)++;
         precision = 0;
-        i++;
-        if (str[i] <= '0' && str[i] >= '9')
-            precision = - 1;
-        while (str[i] >= '0' && str[i] <= '9') {
-            precision = precision * 10 + (str[i] - '0');
-            i++;
+        while (format[*a] >= '0' && format[*a] <= '9') {
+            precision = precision * 10 + (format[*a] - '0');
+            (*a)++;
         }
-    } else if (precision == 0)
-        precision = 6;
-    *index = i;
+    }
     return precision;
 }
 
-void my_printf(char const *format, ...)
+void attribute_selector(const char *format, int *a, int *attributs)
 {
-    va_list ap;
-    int i = 0;
-    int pre = 0;
-
-    va_start(ap, format);
-    if (format[0] == '\0')
-        return;
-    for (i = 0; format[i] != '\0'; i++) {
-        if (format[i] == '%'){
-            i++;
-            pre = get_precision(format, &i);
-            test1(format, i, pre, ap);
-        } else {
-            write(1, format + i, 1);
+    while (format[*a] == '#' || format[*a] == '0'
+    || format[*a] == '+' || format[*a] == '-' || format[*a] == ' ') {
+        if (format[*a] == '#')
+            attributs[1] = 1;
+        if (format[*a] == '0'){
+            attributs[2] = 1;
         }
+        if (format[*a] == '-'){
+            attributs[3] = 1;
+            attributs[2] = 0;
+        }
+        if (format[*a] == ' '){
+            attributs[4] = 1;
+        }
+        if (format[*a] == '+'){
+            attributs[5] = 1;
+            attributs[4] = 0;
+        }
+        (*a)++;
     }
+}
+
+int format_selector(const char *format, int *a, va_list liste, int *count)
+{
+    int precision = 6;
+    int attributs[6] = {0, 0, 0, 0, 0, 0};
+
+    if (format[*a] == '%'){
+        (*a)++;
+        attribute_selector(format, a, attributs);
+        precision = calcul_precision(format, a, attributs);
+        *count += flag_selector(format[*a], liste, precision, attributs);
+    } else {
+        my_putchar(format[*a]);
+        (*count)++;
+    }
+    return *count;
+}
+
+int my_printf(const char *restrict format, ...)
+{
+    int count = 0;
+    va_list liste;
+
+    va_start(liste, format);
+    if (format == NULL || (format[0] == ' ' && format[1] == '\0')) {
+        return -1;
+    }
+    for (int a = 0; format[a] != '\0'; a++){
+        count = format_selector(format, &a, liste, &count);
+    }
+    va_end(liste);
+    return count;
 }

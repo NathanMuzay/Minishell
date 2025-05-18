@@ -4,7 +4,8 @@
 ** File description:
 ** Day 8, task 1
 */
-#include "my.h"
+
+#include <stdlib.h>
 
 char *my_strdup(char const *src)
 {

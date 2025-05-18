@@ -4,10 +4,6 @@
 ** File description:
 ** Day 6, 15
 */
-#include "my.h"
-
-
-
 
 int my_str_isupper(char const *str)
 {

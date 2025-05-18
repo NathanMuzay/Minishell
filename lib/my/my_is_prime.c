@@ -4,10 +4,6 @@
 ** File description:
 ** Day 5, task 6
 */
-#include "my.h"
-
-
-
 
 int my_is_prime(int nb)
 {

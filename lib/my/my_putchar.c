@@ -1,16 +1,13 @@
 /*
 ** EPITECH PROJECT, 2024
-** my_isneg
+** my_putchar
 ** File description:
-** my_isneg.c
+** og function
 */
-#include "my.h"
 
-
-
+#include <unistd.h>
 
 int my_putchar(char c)
 {
-    write(1, &c, 1);
-    return 0;
+    return write(1, &c, 1);
 }

@@ -4,10 +4,6 @@
 ** File description:
 ** pour my_str_to_word_array
 */
-#include "my.h"
-
-
-
 
 int my_isalpha(char c)
 {

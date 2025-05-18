@@ -4,10 +4,8 @@
 ** File description:
 ** Day 8, task 3
 */
+
 #include "my.h"
-
-
-
 
 int my_show_word_array(char *const *tab)
 {

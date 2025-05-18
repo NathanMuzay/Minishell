@@ -1,17 +1,15 @@
 /*
 ** EPITECH PROJECT, 2024
-** bootcamp
+** my_strcpy
 ** File description:
-** day 2
+** Day 6, task 1
 */
 
-#include "../../include/my.h"
-
-char *my_strcpy(char *dest, const char *src)
+char *my_strcpy(char *dest, char const *src)
 {
     int i = 0;
 
-    while (src[i] != '\0') {
+    while (src[i] != '\0'){
         dest[i] = src[i];
         i++;
     }

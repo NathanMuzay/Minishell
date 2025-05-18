@@ -4,7 +4,6 @@
 ** File description:
 ** day 5, task 5
 */
-#include "my.h"
 
 int my_compute_square_root(int nb)
 {

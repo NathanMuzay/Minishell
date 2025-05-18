@@ -6,24 +6,21 @@
 ##
 
 CC = gcc
-AR = ar rcs
-CFLAGS = -Iinclude -I./csfml/include
+CFLAGS = -g3 -Wall -Wextra -Iinclude
+LDFLAGS = -lm
 SRC_LIB = $(wildcard lib/my/*.c)
 OBJ_LIB = $(SRC_LIB:.c=.o)
-MY_H = my.h
-NAME = mysh
-SRC_PROG = $(shell find . -type f -name "*.c")
+SRC_PROG = $(shell find src -name '*.c')
 OBJ_PROG = $(SRC_PROG:.c=.o)
+NAME = 42sh
 
 all: $(NAME)
 
 libmy.a: $(OBJ_LIB)
-	$(AR) libmy.a $(OBJ_LIB)
-
-all: libmy.a $(NAME)
+	ar rcs libmy.a $(OBJ_LIB)
 
 $(NAME): libmy.a $(OBJ_PROG)
-	$(CC) -o $(NAME) $(OBJ_PROG) -L. -lmy $(LDFLAGS) -lm
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ_PROG) -L. -lmy $(LDFLAGS)
 
 clean:
 	rm -f $(OBJ_LIB) $(OBJ_PROG)
@@ -31,4 +28,4 @@ clean:
 fclean: clean
 	rm -f libmy.a $(NAME)
 
-re: fclean all clean
+re: fclean all

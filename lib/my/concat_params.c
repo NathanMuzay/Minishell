@@ -4,10 +4,10 @@
 ** File description:
 ** Day 8, task 2
 */
-#include "my.h"
 
-
-
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 char *concat_params(int argc, char **argv)
 {

@@ -1,87 +1,98 @@
 /*
 ** EPITECH PROJECT, 2024
-** B-CPE-101-MAR-1-1-myprintf-nathan.muzay
+** my.h
 ** File description:
-** my
+** prototype de mes fonctions
 */
 
-#include <string.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <stdarg.h>
-#include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdarg.h>
+#include <string.h>
+#include <ctype.h>
+#include <stdbool.h>
+#include <unistd.h>
 #include <math.h>
-#include <fcntl.h>
-#include <SFML/Graphics.h>
-#include <SFML/Window.h>
-#include <SFML/Audio.h>
-#include <stdlib.h>
-#include "struct.h"
+#include <time.h>
+
+#include <dirent.h>
 #include <sys/stat.h>
+#include <sys/sysmacros.h>
+#include <fcntl.h>
 
-#ifndef MY_H_
-    #define MY_H_
-    #define BUFFER_SIZE 1024
+#include <utmp.h>
+#include <sys/wait.h>
+#include <signal.h>
 
-char **cpy_env(char **envp);
-void handle_pipe_process(var_t *f, int *prev_fd,
-    char *cmd, char **env);
-int my_cd(char **args, char **env);
-void staaatus(pid_t pid, int status, var_t *f);
-void child_2(int pipefd[2], char *right_cmd, char **args, char **env);
-void child_1(int pipefd[2], char *left_cmd, char **args, char **env);
-void handle_redirections(char **args);
-void my_env(char **env);
-int chevron(char **args, int i);
-int param(char **args, int i);
-int double_chevron(char **args, int i);
-void my_setenv(char **env, var_t *f);
-int my_unsetenv(char **env, var_t *f);
-void parsing_env(char **env, var_t *f);
-int verif_exist(char *name, var_t *f);
-char *my_strchr(const char *str, int c);
-int strlen_lign(char *buff);
-int nb_lign(char *str);
-int add(void *data, char **args);
-int my_getnbr_n(char *const str, int n);
+#include <errno.h>
+
+#include <glob.h>
+
+#include <termios.h>
+
+#ifndef MY_HEADERS
+    #define MY_HEADERS
+    #ifndef M_PI
+        #define M_PI 3.14159265358979323846
+    #endif
+int is_digit(const char *str);
 int my_getnbr(char *const str);
-char *nb_to_str(int i);
-char *concat_params(int argc, char **argv);
-int my_is_prime(int nb);
-int my_isalpha(char c);
-int len_float(int f);
-char *my_strcat(char *dest, const char *src);
-int my_strcmp(char const *s1, char const *s2);
-char *my_strdup(char const *src);
-char *my_strlowcase(char *str);
-char *my_strncat(char *dest, char const *src, int nb);
-int my_strncmp(char const *s1, char const *s2, int n);
-char *my_strncpy(char *dest, char const *src, int n);
-char *my_strstr(char *str, char const *to_find);
-char **str_to_array(char *buff);
-int nb_char(char *str);
-int nb_mot(char *str);
-char *my_strupcase(char *str);
-void my_swap(void *a, void *b);
-int my_show_word_array(char *const *tab);
-//my_printf
-void my_printf(char const *format, ...);
+int my_printf(const char *restrict format, ...);
+int flag_selector(const char, va_list, int, int *);
+char *my_hexadecimal(unsigned long int, char);
+char *my_octal(unsigned long int);
+unsigned int my_decimal(int);
+unsigned int my_put_unsigned(unsigned int);
+char *my_putfloat(float, int);
+char *my_scientific(double, int);
+int my_numlen(unsigned int);
+int my_intnumlen(int);
+int non_signe(va_list, int, int *);
+int caractere(va_list);
+int prcentage(void);
+char *concat_params(int, char **);
+int my_compute_factorial_it(int);
+int my_compute_factorial_rec(int);
+int my_compute_power_it(int, int);
+int my_compute_power_rec(int, int);
+int my_compute_square_root(int);
+int my_find_prime_sup(int);
+int my_isalpha(char);
+int my_isalnum(char);
+int my_isneg(int);
+int my_is_prime(int);
 int my_putchar(char);
+int my_put_nbr(int);
 int my_putstr(char const *);
-int my_putnbr(int);
 char *my_revstr(char *);
+int my_show_word_array(char *const *);
+char *my_strcat(char *, char const *);
+int my_strcmp(char const *, char const *);
 char *my_strcpy(char *, char const *);
-int get_precision(const char *str, int *index);
+char *my_strncpy(char *, char const *, int);
+char *my_strdup(char const *);
+int my_str_isalpha(char const *);
+int my_str_islower(char const *);
+int my_str_isnum(char const *);
+int my_str_isprintable(char const *);
+int my_str_isupper(char const *);
 int my_strlen(char const *);
-int nb_len(int);
-int my_putnbr_hexamaj(unsigned int nb);
-int my_putnbr_hexamin(unsigned long int nb);
-long unsigned int my_putnbr_octal(unsigned int n);
-int my_put_unsigned(unsigned long int nb);
-int my_put_float_f(double a, int precision);
-//maths
-int my_compute_power_it(int nb, int p);
-
-#endif /* !MY_H_ */
+char *my_strlowcase(char *);
+char *my_strncat(char *, char const *, int);
+int my_strncmp(char const *, char const *, int);
+char *my_strstr(char *, char const *);
+char *my_strupcase(char *);
+void my_swap(int *, int *);
+char **my_str_to_word_array(char const *);
+char **my_str_to_word_array_delim(const char *str, char delim);
+int is_integer(const char *);
+int is_float(const char *str);
+int my_isdigit(const char);
+int my_atoi(const char *);
+char *int_to_str(int nb);
+char **space_to_array(char const *str);
+char **strdup_array(char **array, int len_addition, char *ignore);
+int count_lines_array(char *const *tab);
+char *clean_str(char *str);
+char *array_to_str(char **array);
+#endif

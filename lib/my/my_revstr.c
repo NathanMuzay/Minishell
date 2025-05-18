@@ -1,10 +1,9 @@
 /*
 ** EPITECH PROJECT, 2024
-** B-CPE-100-MAR-1-1-cpoolday13-nathan.muzay
-** File description:
 ** my_revstr
+** File description:
+** Day 6, task 3
 */
-#include "my.h"
 
 char *my_revstr(char *str)
 {

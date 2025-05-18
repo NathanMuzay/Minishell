@@ -4,10 +4,6 @@
 ** File description:
 ** Day 6, task 9
 */
-#include "my.h"
-
-
-
 
 char *my_strlowcase(char *str)
 {

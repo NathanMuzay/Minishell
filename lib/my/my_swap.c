@@ -4,15 +4,11 @@
 ** File description:
 ** day 4, task 1
 */
-#include "my.h"
 
-
-
-
-void my_swap(void *a, void *b)
+void my_swap(int *a, int *b)
 {
-    void *temp = &a;
+    int temp = *a;
 
-    a = &b;
-    b = &temp;
+    *a = *b;
+    *b = temp;
 }

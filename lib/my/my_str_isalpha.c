@@ -4,10 +4,6 @@
 ** File description:
 ** Day 6, task 12
 */
-#include "my.h"
-
-
-
 
 int my_str_isalpha(char const *str)
 {
